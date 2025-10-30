@@ -1,0 +1,14 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic>=2.7.4,<3.0.0
+langgraph==0.2.45
+langchain-core==0.3.21
+langchain-openai==0.2.10
+openai==1.56.0
+python-dotenv==1.0.0
+jsonschema==4.20.0
+genson==1.2.2
+jsondiff==2.0.0
+tenacity==8.2.3
+httpx==0.25.2
+pytest==7.4.3

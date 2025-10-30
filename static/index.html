@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Transformation API - Web UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .panel h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        select, input[type="file"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-download {
+            background: #28a745;
+            margin-top: 10px;
+        }
+
+        .btn-download:hover {
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .progress {
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress.active {
+            display: block;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            animation: progress-animation 2s ease-in-out infinite;
+        }
+
+        @keyframes progress-animation {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .log-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .log-entry {
+            padding: 4px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-success { color: #4caf50; }
+        .log-error { color: #f44336; }
+        .log-info { color: #2196f3; }
+        .log-warning { color: #ff9800; }
+
+        .output-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 600px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .error-message {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .file-info {
+            background: #e8f4f8;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #0277bd;
+            display: none;
+        }
+
+        .file-info.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Scenario Transformation API</h1>
+            <p>Transform educational scenarios with AI-powered re-contextualization</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Panel: Input -->
+            <div class="panel">
+                <h2>📝 Input Configuration</h2>
+
+                <div class="form-group">
+                    <label for="jsonFile">Upload JSON File</label>
+                    <input type="file" id="jsonFile" accept=".json">
+                    <div id="fileInfo" class="file-info"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jsonInput">Or Paste JSON Here</label>
+                    <textarea id="jsonInput" placeholder='{"lessonInformation": {...}}'></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="scenarioSelect">Select Scenario</label>
+                    <select id="scenarioSelect">
+                        <option value="">Loading scenarios...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="scenarioIndex">Or Enter Scenario Index (1-36)</label>
+                    <input type="number" id="scenarioIndex" min="1" max="36" placeholder="e.g., 1">
+                </div>
+
+                <button id="transformBtn" class="btn">🚀 Transform Scenario</button>
+
+                <div class="progress" id="progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Initializing...</div>
+                    <div class="log-container" id="logContainer"></div>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </div>
+
+            <!-- Right Panel: Output -->
+            <div class="panel">
+                <h2>📦 Transformation Output</h2>
+
+                <div class="stats" id="stats" style="display: none;">
+                    <div class="stat-card">
+                        <div class="stat-label">Status</div>
+                        <div class="stat-value" id="statStatus">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Execution Time</div>
+                        <div class="stat-value" id="statTime">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chunks Received</div>
+                        <div class="stat-value" id="statChunks">-</div>
+                    </div>
+                </div>
+
+                <button id="downloadBtn" class="btn btn-download" style="display: none;">
+                    💾 Download Output JSON
+                </button>
+
+                <div class="output-container" id="outputContainer">
+                    <span style="color: #888;">Transformed JSON will appear here...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1';
+        let currentOutput = null;
+        let chunkCount = 0;
+        let sampleInputData = null; // Store sample input
+
+        // Load sample input data on page load
+        async function loadSampleInput() {
+            try {
+                const response = await fetch('/static/sample_input.json');
+                if (!response.ok) {
+                    // Try alternate path
+                    const response2 = await fetch('../sample_input.json');
+                    if (response2.ok) {
+                        sampleInputData = await response2.json();
+                    }
+                } else {
+                    sampleInputData = await response.json();
+                }
+
+                if (sampleInputData) {
+                    // Auto-populate the JSON input
+                    document.getElementById('jsonInput').value = JSON.stringify(sampleInputData, null, 2);
+                    const fileInfo = document.getElementById('fileInfo');
+                    fileInfo.textContent = '✅ Auto-loaded: sample_input.json';
+                    fileInfo.classList.add('show');
+                }
+            } catch (error) {
+                console.log('Could not auto-load sample_input.json - user will need to upload manually');
+            }
+        }
+
+        // Load scenarios on page load
+        async function loadScenarios() {
+            try {
+                const response = await fetch(`${API_BASE}/scenarios`);
+                const data = await response.json();
+
+                const select = document.getElementById('scenarioSelect');
+                select.innerHTML = '<option value="">-- Select a scenario --</option>';
+
+                data.scenarios.forEach((scenario, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${index + 1}. ${scenario.substring(0, 100)}...`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading scenarios:', error);
+                showError('Failed to load scenarios');
+            }
+        }
+
+        // Handle file upload
+        document.getElementById('jsonFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const text = await file.text();
+                document.getElementById('jsonInput').value = text;
+
+                const fileInfo = document.getElementById('fileInfo');
+                fileInfo.textContent = `✅ Loaded: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+                fileInfo.classList.add('show');
+            }
+        });
+
+        // Transform scenario
+        document.getElementById('transformBtn').addEventListener('click', async () => {
+            const jsonInput = document.getElementById('jsonInput').value.trim();
+            const scenarioSelect = document.getElementById('scenarioSelect').value;
+            const scenarioIndex = document.getElementById('scenarioIndex').value;
+
+            // Validation
+            if (!jsonInput) {
+                showError('Please provide input JSON');
+                return;
+            }
+
+            let inputJson;
+            try {
+                inputJson = JSON.parse(jsonInput);
+            } catch (error) {
+                showError('Invalid JSON format');
+                return;
+            }
+
+            const selectedScenario = scenarioIndex || scenarioSelect;
+            if (!selectedScenario) {
+                showError('Please select a scenario or enter an index');
+                return;
+            }
+
+            // Reset UI
+            hideError();
+            hideSuccess();
+            document.getElementById('outputContainer').innerHTML = '<span style="color: #888;">Processing...</span>';
+            document.getElementById('stats').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+            currentOutput = null;
+            chunkCount = 0;
+
+            // Show progress
+            const progress = document.getElementById('progress');
+            progress.classList.add('active');
+            const logContainer = document.getElementById('logContainer');
+            logContainer.innerHTML = '';
+
+            // Disable button
+            const btn = document.getElementById('transformBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Processing...';
+
+            try {
+                const response = await fetch(`${API_BASE}/transform/stream-openai`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        input_json: inputJson,
+                        selected_scenario: parseInt(selectedScenario)
+                    })
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const eventData = JSON.parse(line.slice(6));
+                            handleEvent(eventData);
+                        }
+                    }
+                }
+
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+                addLog('error', `Error: ${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🚀 Transform Scenario';
+                progress.classList.remove('active');
+            }
+        });
+
+        function handleEvent(event) {
+            const logContainer = document.getElementById('logContainer');
+            const progressText = document.getElementById('progressText');
+            const progressFill = document.getElementById('progressFill');
+
+            switch (event.event) {
+                case 'start':
+                    addLog('info', '🚀 Starting transformation');
+                    progressText.textContent = 'Starting transformation...';
+                    progressFill.style.width = '10%';
+                    break;
+
+                case 'node_start':
+                    addLog('info', `⏳ ${event.node}`);
+                    progressText.textContent = `Processing: ${event.node}`;
+                    break;
+
+                case 'node_complete':
+                    addLog('success', `✅ ${event.node}`);
+                    break;
+
+                case 'openai_chunk':
+                    chunkCount++;
+                    if (chunkCount % 50 === 0) {
+                        progressText.textContent = `Receiving AI response... (${chunkCount} chunks)`;
+                        progressFill.style.width = '50%';
+                    }
+                    break;
+
+                case 'output_json':
+                    addLog('success', '📦 Received complete output JSON!');
+                    currentOutput = event.data;
+                    displayOutput(event.data);
+                    progressFill.style.width = '90%';
+                    console.log('Output JSON saved, size:', JSON.stringify(currentOutput).length);
+                    break;
+
+                case 'complete':
+                    addLog('success', '🎉 Transformation complete!');
+                    const result = event.result;
+                    updateStats(result);
+                    progressFill.style.width = '100%';
+                    progressText.textContent = 'Complete!';
+                    showSuccess('Transformation completed successfully!');
+
+                    // Fallback: if currentOutput not set, use result.output_json
+                    if (!currentOutput && result.output_json) {
+                        currentOutput = result.output_json;
+                        console.log('Using output_json from complete event');
+                    }
+
+                    // Show download button
+                    document.getElementById('downloadBtn').style.display = 'block';
+                    console.log('Download button visible, currentOutput exists:', !!currentOutput);
+                    break;
+
+                case 'error':
+                    addLog('error', `❌ ${event.message}`);
+                    showError(event.message);
+                    break;
+            }
+        }
+
+        function addLog(type, message) {
+            const logContainer = document.getElementById('logContainer');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        function displayOutput(data) {
+            const container = document.getElementById('outputContainer');
+            container.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function updateStats(result) {
+            document.getElementById('stats').style.display = 'grid';
+
+            const validation = result.validation_report;
+            document.getElementById('statStatus').textContent = validation.schema_pass ? '✅ PASS' : '❌ FAIL';
+            document.getElementById('statStatus').style.color = validation.schema_pass ? '#4caf50' : '#f44336';
+
+            document.getElementById('statTime').textContent = `${(result.execution_time_ms / 1000).toFixed(2)}s`;
+            document.getElementById('statChunks').textContent = chunkCount;
+        }
+
+        function showError(message) {
+            const el = document.getElementById('errorMessage');
+            el.textContent = '❌ ' + message;
+            el.classList.add('show');
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        function showSuccess(message) {
+            const el = document.getElementById('successMessage');
+            el.textContent = '✅ ' + message;
+            el.classList.add('show');
+        }
+
+        function hideSuccess() {
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        // Download output
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            console.log('Download button clicked, currentOutput:', currentOutput);
+
+            if (!currentOutput) {
+                showError('No output data available to download. Please run a transformation first.');
+                console.error('currentOutput is null or undefined');
+                return;
+            }
+
+            try {
+                const dataStr = JSON.stringify(currentOutput, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `transformed_scenario_${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showSuccess('Output JSON downloaded!');
+                console.log('Download successful');
+            } catch (error) {
+                showError('Error downloading file: ' + error.message);
+                console.error('Download error:', error);
+            }
+        });
+
+        // Load sample input and scenarios on page load
+        loadSampleInput();
+        loadScenarios();
+    </script>
+</body>
+</html>
