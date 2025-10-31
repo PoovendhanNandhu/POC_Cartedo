@@ -67,77 +67,82 @@ async def transform_scenario_stream_openai(request: TransformRequest):
             await asyncio.sleep(0.05)
             
             # 3. Transformer with streaming (progress only, no chunks)
-            yield f"data: {json.dumps({'event': 'node_start', 'node': 'TransformerNode', 'message': 'Starting OpenAI transformation'})}\n\n"
-            await asyncio.sleep(0.05)
-            
-            # Run transformer streaming in thread pool but don't send chunks
-            updated_state = None
-            
-            # Use a queue to communicate chunks from thread
-            from queue import Queue
-            chunk_queue = Queue()
+            # Skip transformation if Analyzer short-circuited (same scenario)
+            if state.get("final_status") == "OK" and state.get("transformed_json"):
+                yield f"data: {json.dumps({'event': 'node_skipped', 'node': 'TransformerNode', 'message': 'Same scenario selected; skipping transformation'})}\n\n"
+                await asyncio.sleep(0.05)
+            else:
+                yield f"data: {json.dumps({'event': 'node_start', 'node': 'TransformerNode', 'message': 'Starting OpenAI transformation'})}\n\n"
+                await asyncio.sleep(0.05)
+                
+                # Run transformer streaming in thread pool but don't send chunks
+                updated_state = None
+                
+                # Use a queue to communicate chunks from thread
+                from queue import Queue
+                chunk_queue = Queue()
 
-            def run_transformer():
-                final_state = None
-                error_msg = None
-                chunk_count = 0
-                try:
-                    for chunk in transformer_node_streaming(state):
-                        if isinstance(chunk, dict) and chunk.get("__complete__"):
-                            final_state = chunk.get("__state__")
-                            if chunk.get("__error__"):
-                                error_msg = chunk["__error__"]
-                        else:
-                            # Send chunks to queue for streaming
-                            chunk_count += 1
-                            chunk_queue.put({'type': 'chunk', 'content': chunk, 'count': chunk_count})
-                except Exception as e:
-                    import traceback
-                    error_msg = f"{str(e)}\n{traceback.format_exc()}"
+                def run_transformer():
+                    final_state = None
+                    error_msg = None
+                    chunk_count = 0
+                    try:
+                        for chunk in transformer_node_streaming(state):
+                            if isinstance(chunk, dict) and chunk.get("__complete__"):
+                                final_state = chunk.get("__state__")
+                                if chunk.get("__error__"):
+                                    error_msg = chunk["__error__"]
+                            else:
+                                # Send chunks to queue for streaming
+                                chunk_count += 1
+                                chunk_queue.put({'type': 'chunk', 'content': chunk, 'count': chunk_count})
+                    except Exception as e:
+                        import traceback
+                        error_msg = f"{str(e)}\n{traceback.format_exc()}"
 
-                chunk_queue.put({'type': 'done'})
-                return final_state, error_msg
+                    chunk_queue.put({'type': 'done'})
+                    return final_state, error_msg
 
-            # Execute in thread pool
-            with concurrent.futures.ThreadPoolExecutor() as pool:
-                future = loop.run_in_executor(pool, run_transformer)
+                # Execute in thread pool
+                with concurrent.futures.ThreadPoolExecutor() as pool:
+                    future = loop.run_in_executor(pool, run_transformer)
 
-                # Stream chunks while waiting
-                while not future.done():
-                    await asyncio.sleep(0.1)  # Check frequently
+                    # Stream chunks while waiting
+                    while not future.done():
+                        await asyncio.sleep(0.1)  # Check frequently
 
-                    # Process any chunks in queue
+                        # Process any chunks in queue
+                        while not chunk_queue.empty():
+                            chunk_data = chunk_queue.get()
+                            if chunk_data['type'] == 'chunk':
+                                yield f"data: {json.dumps({'event': 'openai_chunk', 'chunk': chunk_data['content'], 'count': chunk_data['count']})}\n\n"
+                            elif chunk_data['type'] == 'done':
+                                break
+
+                    # Get any remaining chunks
                     while not chunk_queue.empty():
                         chunk_data = chunk_queue.get()
                         if chunk_data['type'] == 'chunk':
                             yield f"data: {json.dumps({'event': 'openai_chunk', 'chunk': chunk_data['content'], 'count': chunk_data['count']})}\n\n"
-                        elif chunk_data['type'] == 'done':
-                            break
 
-                # Get any remaining chunks
-                while not chunk_queue.empty():
-                    chunk_data = chunk_queue.get()
-                    if chunk_data['type'] == 'chunk':
-                        yield f"data: {json.dumps({'event': 'openai_chunk', 'chunk': chunk_data['content'], 'count': chunk_data['count']})}\n\n"
-
-                # Get results
-                updated_state, error_msg = await future
-            
-            # Check for errors
-            if error_msg:
-                yield f"data: {json.dumps({'event': 'error', 'message': f'TransformerNode error: {error_msg}'})}\n\n"
-                return
-            
-            # Update state with result
-            if updated_state:
-                state = updated_state
-            else:
-                # If no state returned, something went wrong
-                yield f"data: {json.dumps({'event': 'error', 'message': 'TransformerNode did not return updated state'})}\n\n"
-                return
-            
-            yield f"data: {json.dumps({'event': 'node_complete', 'node': 'TransformerNode', 'message': 'Transformation complete'})}\n\n"
-            await asyncio.sleep(0.05)
+                    # Get results
+                    updated_state, error_msg = await future
+                
+                # Check for errors
+                if error_msg:
+                    yield f"data: {json.dumps({'event': 'error', 'message': f'TransformerNode error: {error_msg}'})}\n\n"
+                    return
+                
+                # Update state with result
+                if updated_state:
+                    state = updated_state
+                else:
+                    # If no state returned, something went wrong
+                    yield f"data: {json.dumps({'event': 'error', 'message': 'TransformerNode did not return updated state'})}\n\n"
+                    return
+                
+                yield f"data: {json.dumps({'event': 'node_complete', 'node': 'TransformerNode', 'message': 'Transformation complete'})}\n\n"
+                await asyncio.sleep(0.05)
             
             # 4. Consistency Checker
             yield f"data: {json.dumps({'event': 'node_start', 'node': 'ConsistencyCheckerNode'})}\n\n"

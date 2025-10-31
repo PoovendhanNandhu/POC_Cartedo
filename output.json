@@ -1,0 +1,170 @@
+{
+  "lessonInformation": {
+    "level": "Practice",
+    "lesson": "Acting as a consultant, students will develop a short executive summary recommending how a fast food brand should respond to its competitor's aggressive pricing. They\u2019ll analyze the competitor\u2019s move, market impact, FreshTaste\u2019s strengths, and four strategic options. Their goal is to propose a clear, realistic, and sustainable plan to protect or grow market share via an executive summary."
+  },
+  "selectedScenarioOption": "A finance department at FreshTaste is evaluating volatile quarterly revenues after a competitor\u2019s aggressive pricing. As a management consultant, learners must analyze SWOT data and synthesize four potential strategic responses to recommend a plan that helps FreshTaste maintain its loyal customer base, safeguard profitability, and uphold its commitment to serving high-quality, innovative fast food.",
+  "simulationName": "Strategic Consultant: Responding to Competitive Pricing Challenges",
+  "workplaceScenario": {
+    "scenario": "FreshTaste faces a critical crossroads due to a competitor\u2019s aggressive pricing strategy. Learners must synthesize market data and internal strengths to recommend a practical, values-driven strategy for sustained growth.",
+    "simulationType": "Management Consulting",
+    "background": {
+      "organizationName": "FreshTaste",
+      "aboutOrganization": "FreshTaste, a fast-casual brand known for its high-quality, innovative menu, has seen steady growth in an increasingly competitive fast food sector. The company\u2019s core clientele values quality ingredients and creativity. Recently, a direct competitor has disrupted the market with an aggressive pricing strategy, sparking local buzz and shifting consumer attention. FreshTaste\u2019s leadership is concerned about fluctuating revenues and preserving brand integrity while maintaining profitability in the face of this price-driven challenge.",
+      "organizationImageKeyWords": "fast-casual restaurant, high-quality food, innovative menu, creativity, branding, strategy"
+    },
+    "challenge": {
+      "currentIssue": "Following the launch of a competitor\u2019s aggressive pricing strategy, FreshTaste\u2019s flagship locations have experienced notable fluctuations in daily customer visits. Early sales data signal an erosion of loyal customer segments, threatening both revenue and brand differentiation. With the competitor prioritizing affordability, FreshTaste must quickly assess how to respond strategically without compromising its image or core values. Leadership requires data-driven insight to determine whether to adjust pricing, launch new offerings, intensify marketing, or pursue alternative growth tactics."
+    },
+    "learnerRoleReportingManager": {
+      "learnerRole": {
+        "roleDescription": "You are engaged to advise FreshTaste\u2019s executive leadership on actionable strategy options in response to the competitor\u2019s pricing strategy, drawing on market and consumer analytics to deliver clear, impactful recommendations.",
+        "scopeOfWork": [
+          {
+            "task": "Delivering a Strategic Executive Summary for Leadership",
+            "description": "Conduct a thorough analysis for the FreshTaste executive team, evaluating the competitor\u2019s pricing impact, assessing market and consumer data, and reviewing FreshTaste\u2019s internal SWOT. Objectively compare four strategic response options\u2014including pricing changes, menu innovation, targeted promotions, and brand reinforcement\u2014and provide a focused executive summary recommending the best path forward to protect customer loyalty and profitability."
+          }
+        ],
+        "role": "Management Consultant"
+      },
+      "reportingManager": {
+        "name": "Mark Caldwell",
+        "email": "",
+        "role": "Chief Strategy Officer",
+        "gender": "male",
+        "message": "With a track record in competitive positioning for mid-sized food chains, Mark oversees corporate strategy at FreshTaste and expects concise, insight-driven guidance rooted in market realities and the company\u2019s mission.",
+        "avatarUrl": "https://cartedo.s3.us-east-2.amazonaws.com/web/7b5d56a3a81925faa1d1.jpg"
+      }
+    }
+  },
+  "scenarioOptions": [],
+  "assessmentCriterion": [],
+  "selectedAssessmentCriterion": [],
+  "industryAlignedActivities": [],
+  "selectedIndustryAlignedActivities": [],
+  "topicWizardData": {
+    "scenarioOptions": [
+      "A strategy team at HarvestBowls is facing a drop in foot traffic after Nature\u2019s Crust introduced a $1 value menu. As a business consultant, learners must analyze the market shake-up, assess possible strategic responses, and recommend a plan that helps HarvestBowls maintain its loyal customer base, safeguard profitability, and uphold its commitment to serving fresh, organic, and wholesome fast food.",
+      "A finance department at FreshTaste is evaluating volatile quarterly revenues after a competitor\u2019s aggressive pricing. As a management consultant, learners must analyze SWOT data and synthesize four potential strategies to identify and justify the most cost-effective path to defend FreshTaste\u2019s position in a shifting market.",
+      "A marketing group at FreshTaste is assessing consumer loyalty erosion caused by FastBurger\u2019s discounted offerings. As an external advisor, learners must interpret consumer trend data, assess four strategic options, and build an evidence-based executive summary to restore competitive advantage and attract value-seeking customers.",
+      "A mid-market fashion retailer, TrendWave, is losing sales after rival ChicStyles launched a 'Buy One Get One Free' promotion on their summer line. As consultants, learners must analyze the threat, weigh strategic responses, and propose how TrendWave can protect its brand equity while regaining foot traffic.",
+      "SkyLink Airlines sees bookings dip sharply after AeroJet slashes fares on popular domestic routes by 30%. As advisors, learners must evaluate how SkyLink can respond\u2014through loyalty program tweaks, bundled offers, or targeted promotions\u2014while preserving margins and brand positioning.",
+      "TechNova faces slowing sales when competitor BrightEdge launches heavy discounts on smartphones during peak holiday season. Learners must recommend how TechNova should respond to protect revenue while maintaining its reputation for innovation.",
+      "BlueHaven Hotels faces occupancy challenges after a competitor chain introduces steep weekend package deals. Students must advise on whether BlueHaven should counter with price-matching, loyalty perks, or service differentiation strategies.",
+      "BurgerZone\u2019s foot traffic declines after rival GrillKing promotes a $2 meal deal. Students must recommend a clear plan that balances competitive pricing with BurgerZone\u2019s positioning around flavor variety and speed of service.",
+      "FreshMart sees reduced traffic after ValueGrocer launches weekly 'half-price family basket' promotions. Learners must weigh whether FreshMart should respond with price cuts, loyalty points, or a focus on fresh and local produce.",
+      "MediCore\u2019s flagship drug sales are at risk after a competitor slashes prices on a generic equivalent. Learners must recommend strategies balancing regulatory compliance, pricing flexibility, and long-term R&D investment.",
+      "FlexFit Gym memberships decline after rival BodyWorks introduces steeply discounted annual packages. Learners must recommend whether FlexFit should compete on price, expand digital offerings, or reinforce its premium brand.",
+      "NimbusCloud faces customer churn as rival SkyWare offers steep introductory discounts for enterprise clients. Learners must recommend whether NimbusCloud should counter with bundled services, retention incentives, or targeted upselling.",
+      "A private university experiences reduced MBA enrollments after a competitor offers significant tuition discounts. Learners must evaluate whether to respond with scholarships, enhanced career services, or program differentiation.",
+      "AutoDrive\u2019s market share shrinks after EcoMotors introduces aggressive promotional leasing rates. Learners must recommend a path balancing brand loyalty, dealer incentives, and long-term profitability.",
+      "SafeBank sees attrition in credit card customers after rival TrustBank offers zero-interest balance transfers. Learners must propose how SafeBank should defend market share through product redesign, rewards innovation, or partnership deals.",
+      "CineWave\u2019s subscriptions plateau after rival StreamMax launches an ad-supported $4.99 plan. Learners must advise whether CineWave should drop prices, expand exclusive content, or enhance user experience to stay competitive.",
+      "HealthHub loses foot traffic when rival MediMart runs '$5 prescriptions' promotions. Learners must recommend a sustainable response strategy balancing price, service quality, and health outcomes.",
+      "A mid-market fashion retailer, TrendWave, is losing sales after rival ChicStyles launched a 'Buy One Get One Free' promotion on their summer line. As consultants, learners must analyze the threat, weigh strategic responses, and propose how TrendWave can protect its brand equity while regaining foot traffic.",
+      "SkyLink Airlines sees bookings dip sharply after AeroJet slashes fares on popular domestic routes by 30%. As advisors, learners must evaluate how SkyLink can respond\u2014through loyalty program tweaks, bundled offers, or targeted promotions\u2014while preserving margins and brand positioning.",
+      "TechNova faces slowing sales when competitor BrightEdge launches heavy discounts on smartphones during peak holiday season. Learners must recommend how TechNova should respond to protect revenue while maintaining its reputation for innovation.",
+      "BlueHaven Hotels faces occupancy challenges after a competitor chain introduces steep weekend package deals. Students must advise on whether BlueHaven should counter with price-matching, loyalty perks, or service differentiation strategies.",
+      "BurgerZone\u2019s foot traffic declines after rival GrillKing promotes a $2 meal deal. Students must recommend a clear plan that balances competitive pricing with BurgerZone\u2019s positioning around flavor variety and speed of service.",
+      "FreshMart sees reduced traffic after ValueGrocer launches weekly 'half-price family basket' promotions. Learners must weigh whether FreshMart should respond with price cuts, loyalty points, or a focus on fresh and local produce.",
+      "MediCore\u2019s flagship drug sales are at risk after a competitor slashes prices on a generic equivalent. Learners must recommend strategies balancing regulatory compliance, pricing flexibility, and long-term R&D investment.",
+      "FlexFit Gym memberships decline after rival BodyWorks introduces steeply discounted annual packages. Learners must recommend whether FlexFit should compete on price, expand digital offerings, or reinforce its premium brand.",
+      "NimbusCloud faces customer churn as rival SkyWare offers steep introductory discounts for enterprise clients. Learners must recommend whether NimbusCloud should counter with bundled services, retention incentives, or targeted upselling.",
+      "A private university experiences reduced MBA enrollments after a competitor offers significant tuition discounts. Learners must evaluate whether to respond with scholarships, enhanced career services, or program differentiation.",
+      "AutoDrive\u2019s market share shrinks after EcoMotors introduces aggressive promotional leasing rates. Learners must recommend a path balancing brand loyalty, dealer incentives, and long-term profitability.",
+      "SafeBank sees attrition in credit card customers after rival TrustBank offers zero-interest balance transfers. Learners must propose how SafeBank should defend market share through product redesign, rewards innovation, or partnership deals.",
+      "CineWave\u2019s subscriptions plateau after rival StreamMax launches an ad-supported $4.99 plan. Learners must advise whether CineWave should drop prices, expand exclusive content, or enhance user experience to stay competitive.",
+      "HealthHub loses foot traffic when rival MediMart runs '$5 prescriptions' promotions. Learners must recommend a sustainable response strategy balancing price, service quality, and health outcomes.",
+      "QuickCab\u2019s ridership dips after competitor GoRide launches a 50%-off first-month campaign. Learners must recommend how QuickCab should counter while ensuring driver retention and maintaining service reliability.",
+      "LearnSphere faces declining enrollments as competitor SkillEdge launches steeply discounted bundle courses. Learners must decide whether to compete on pricing, introduce certifications, or enhance job-placement guarantees.",
+      "SparkleBev sees market erosion after rival PureFizz promotes a '2-for-1' sparkling water deal. Learners must propose a strategy balancing pricing, promotions, and brand identity.",
+      "GlobalTel\u2019s customer churn spikes as rival ConnectPlus rolls out discounted family data packs. Learners must recommend whether to match prices, invest in network quality, or enhance loyalty programs.",
+      "SecureLife struggles to retain customers as rival Protecta offers heavy discounts on bundled insurance premiums. Learners must advise on responses that protect profitability while retaining clients.",
+      "SwiftShip loses contracts after rival MoveMax introduces promotional discounts on small business shipping. Learners must analyze competitive pressures and propose a response that sustains growth while protecting margins."
+    ],
+    "assessmentCriterion": [
+      {
+        "keyLearningOutcome": "Learners will be able to analyze the competitor's $1 menu strategy by examining market trends and consumer behavior to assess its potential impact on FreshTaste's performance.",
+        "criterion": [
+          "Explains the competitor's $1 menu strategy, highlighting its value proposition and target audience.",
+          "Identifies at least two market trends or consumer behaviors relevant to the competitor\u2019s strategy.",
+          "Evaluates the likely effects of the $1 menu on FreshTaste\u2019s market share and revenue."
+        ]
+      },
+      {
+        "keyLearningOutcome": "Learners will be able to evaluate FreshTaste\u2019s competitive position by reviewing its strengths, weaknesses, opportunities, and threats (SWOT) to determine viable strategic responses.",
+        "criterion": [
+          "Summarizes FreshTaste\u2019s key strengths and weaknesses, using at least two examples of relevant internal data.",
+          "Identifies at least one opportunity and one threat posed by market conditions or competitor actions.",
+          "Justifies how the analysis shapes the strategic direction for addressing the competitive challenge."
+        ]
+      },
+      {
+        "keyLearningOutcome": "Learners will be able to recommend a strategic plan by comparing FreshTaste\u2019s four provided strategic options to propose an effective response to the $1 menu.",
+        "criterion": [
+          "Describes the four strategic options and their potential costs, benefits, and risks.",
+          "Selects one option as the recommended response and provides two clear reasons for the choice.",
+          "Creates a concise executive summary that effectively presents the plan and rationale for decision-makers."
+        ]
+      }
+    ],
+    "selectedAssessmentCriterion": [
+      {
+        "keyLearningOutcome": "Learners will be able to recommend a strategic plan by comparing FreshTaste\u2019s four provided strategic options to propose an effective response to the $1 menu.",
+        "criterion": [
+          "Describes the four strategic options and their potential costs, benefits, and risks.",
+          "Selects one option as the recommended response and provides two clear reasons for the choice.",
+          "Creates a concise executive summary that effectively presents the plan and rationale for decision-makers."
+        ]
+      },
+      {
+        "keyLearningOutcome": "Learners will be able to evaluate FreshTaste\u2019s competitive position by reviewing its strengths, weaknesses, opportunities, and threats (SWOT) to determine viable strategic responses.",
+        "criterion": [
+          "Summarizes FreshTaste\u2019s key strengths and weaknesses, using at least two examples of relevant internal data.",
+          "Identifies at least one opportunity and one threat posed by market conditions or competitor actions.",
+          "Justifies how the analysis shapes the strategic direction for addressing the competitive challenge."
+        ]
+      },
+      {
+        "keyLearningOutcome": "Learners will be able to analyze the competitor's $1 menu strategy by examining market trends and consumer behavior to assess its potential impact on FreshTaste's performance.",
+        "criterion": [
+          "Explains the competitor's $1 menu strategy, highlighting its value proposition and target audience.",
+          "Identifies at least two market trends or consumer behaviors relevant to the competitor\u2019s strategy.",
+          "Evaluates the likely effects of the $1 menu on FreshTaste\u2019s market share and revenue."
+        ]
+      }
+    ],
+    "industryAlignedActivities": [
+      {
+        "name": "Delivering a Strategic Executive Summary for Leadership",
+        "description": "Learners will assume the role of a business consultant presenting to FreshTaste\u2019s executive team. They will analyze the competitor\u2019s $1 menu strategy, evaluate market and consumer trends, and review FreshTaste\u2019s internal SWOT. Using this analysis, learners will compare four strategic response options and recommend a clear, realistic plan to defend or grow market share. The deliverable is a concise executive summary that synthesizes findings and justifies the chosen strategy for decision-makers. *(KLO 1, KLO 2, KLO 3)*",
+        "industryAlignment": "Executive summaries distill complex analyses into actionable insights for leaders\u2014a core skill in consulting and management. The task requires structured comparison of strategic options, direct evaluation of competitor moves, and the integration of market and internal data\u2014all aligning with how real-world consultants advise brands facing disruptive competition. The focus on concise, evidence-backed recommendations mirrors contemporary industry expectations for client-facing consultants and strategy professionals.",
+        "relevanceJustification": "This activity directly assesses all three KLOs: Learners must analyze the competitor\u2019s $1 menu and market trends (KLO 3), conduct a SWOT to evaluate FreshTaste\u2019s position (KLO 2), and compare four options to recommend a strategic plan (KLO 1). Evidence of mastery includes their summary of options, SWOT analysis, and a clearly articulated recommendation with supporting rationale, all tailored to an executive audience. The executive summary format ensures synthesis and clear communication\u2014key professional skills.",
+        "rationale": "Executive summaries are the professional standard for communicating strategic recommendations to organizational leadership, demanding synthesis, prioritization, and clarity\u2014exactly matching the activity\u2019s objectives."
+      },
+      {
+        "name": "Conducting a SWOT Analysis to Guide Competitive Strategy",
+        "description": "Learners will act as internal strategy analysts for FreshTaste, tasked with preparing a detailed SWOT analysis in response to the competitor's $1 menu launch. They will identify and summarize at least two internal strengths and weaknesses using provided company data. Additionally, learners will pinpoint at least one opportunity and one threat from the external environment and competitor actions. The activity concludes with a brief reflection on how the SWOT findings inform potential strategic responses. *(KLO 2, KLO 3)*",
+        "industryAlignment": "Performing SWOT analyses is a foundational component of business strategy and organizational design. This activity reflects standard industry practice: synthesizing internal and external data to inform decisions and preparing responses to competitive threats. The expectation of both analysis and brief synthesis aligns with typical analyst deliverables in corporate strategy, consulting, and business development roles.",
+        "relevanceJustification": "This activity addresses KLO 2 by requiring learners to assemble a detailed SWOT utilizing internal data (strengths, weaknesses) and to recognize external opportunities and threats. For KLO 3, learners must analyze a competitor\u2019s move and its market context to define relevant threats and opportunities, demonstrating their understanding of industry dynamics. Mastery is evidenced by correctly categorizing SWOT elements and articulating how the analysis shapes strategic direction.",
+        "rationale": "The swot format structures the required organizational scan and ensures learners cover all four SWOT categories, supporting targeted, actionable analysis."
+      },
+      {
+        "name": "Crafting a Comparative Justification of Strategic Options",
+        "description": "Learners will take the perspective of a strategy team member preparing input for a decision workshop. They will compare FreshTaste's four provided strategic options, articulating the potential costs, benefits, and risks of each. Learners must then select the most effective response and justify their choice with two clear reasons, referencing both market conditions and FreshTaste\u2019s internal position. The output is a structured short answer suitable for pre-meeting circulation. *(KLO 1, KLO 2)*",
+        "industryAlignment": "Preparing structured comparative justifications is a common task for junior strategists and analysts supporting management decision-making. The requirement to weigh costs, benefits, and risks against organizational context reflects standard industry practice in competitive response planning. The short answer format matches the brevity and clarity expected in internal team communications and pre-meeting documentation.",
+        "relevanceJustification": "This activity covers KLO 1 by requiring clear comparison of strategic options and a reasoned recommendation, including rationale. KLO 2 is addressed as learners must explicitly tie their recommendation to FreshTaste\u2019s strengths, weaknesses, or other internal analysis, demonstrating evaluative and integrative thinking. Mastery is evidenced by concise articulation of trade-offs and a grounded recommendation, reflecting real-world decision support.",
+        "rationale": "The short-answer format is ideal for structured, focused comparative analysis and clear, actionable recommendations, paralleling typical internal briefing notes."
+      }
+    ],
+    "selectedIndustryAlignedActivities": [
+      {
+        "name": "Delivering a Strategic Executive Summary for Leadership",
+        "description": "Learners will assume the role of a business consultant presenting to FreshTaste\u2019s executive team. They will analyze the competitor\u2019s $1 menu strategy, evaluate market and consumer trends, and review FreshTaste\u2019s internal SWOT. Using this analysis, learners will compare four strategic response options and recommend a clear, realistic plan to defend or grow market share. The deliverable is a concise executive summary that synthesizes findings and justifies the chosen strategy for decision-makers. *(KLO 1, KLO 2, KLO 3)*",
+        "industryAlignment": "Executive summaries distill complex analyses into actionable insights for leaders\u2014a core skill in consulting and management. The task requires structured comparison of strategic options, direct evaluation of competitor moves, and the integration of market and internal data\u2014all aligning with how real-world consultants advise brands facing disruptive competition. The focus on concise, evidence-backed recommendations mirrors contemporary industry expectations for client-facing consultants and strategy professionals.",
+        "relevanceJustification": "This activity directly assesses all three KLOs: Learners must analyze the competitor\u2019s $1 menu and market trends (KLO 3), conduct a SWOT to evaluate FreshTaste\u2019s position (KLO 2), and compare four options to recommend a strategic plan (KLO 1). Evidence of mastery includes their summary of options, SWOT analysis, and a clearly articulated recommendation with supporting rationale, all tailored to an executive audience. The executive summary format ensures synthesis and clear communication\u2014key professional skills.",
+        "rationale": "Executive summaries are the professional standard for communicating strategic recommendations to organizational leadership, demanding synthesis, prioritization, and clarity\u2014exactly matching the activity\u2019s objectives."
+      }
+    ]
+  }
+}

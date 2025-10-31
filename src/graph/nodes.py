@@ -154,6 +154,8 @@ def analyzer_node(state: WorkflowState) -> WorkflowState:
             state["final_status"] = "OK"
             state["transformed_json"] = state["input_json"]
             state["entity_map"] = {}
+            # 🔥 IMPORTANT FLAG for transformer pass-through
+            state["short_circuit"] = True
             return state
         
         # Extract entities from current scenario
@@ -352,7 +354,6 @@ Return COMPLETE topicWizardData as JSON."""
         )
         
         # CRITICAL: Force-restore locked fields from original input
-        # (OpenAI sometimes modifies them despite instructions)
         input_data = input_json.get("topicWizardData", {})
 
         # Check if OpenAI returned data wrapped in topicWizardData or not
@@ -418,7 +419,26 @@ def transformer_node_streaming(state: WorkflowState, stream_callback=None):
         entity_map = state.get("entity_map", {})
         selected_scenario = state.get("selected_scenario_text", "")
         current_scenario = state.get("current_scenario_text", "")
-        
+
+        # 🔥 SHORT-CIRCUIT MODE:
+        # AnalyzerNode decided current_scenario == selected_scenario,
+        # so nothing actually needs to change.
+        if state.get("short_circuit", False):
+            # no OpenAI call, just pass through
+            state["transformed_json"] = deepcopy(state["input_json"])
+
+            state["node_logs"].append(create_log_entry(
+                "TransformerNode",
+                "skipped",
+                0,
+                message="Short-circuit: scenarios identical; no transformation applied"
+            ))
+
+            # tell the streaming loop "we're done" + give final state
+            yield {"__complete__": True, "__state__": state}
+            return
+
+        # NORMAL MODE (we do need to transform with OpenAI):
         if not entity_map:
             raise ValueError("entity_map is empty or missing - AnalyzerNode may have failed")
         if not selected_scenario:
@@ -578,8 +598,8 @@ def consistency_checker_node(state: WorkflowState) -> WorkflowState:
         if not transformed_json:
             raise ValueError("No transformed JSON to check")
         
-        entity_map = state["entity_map"]
-        current_scenario = state["current_scenario_text"]
+        entity_map = state.get("entity_map", {})
+        current_scenario = state.get("current_scenario_text", "")
         
         # Extract old scenario keywords
         old_keywords = []
